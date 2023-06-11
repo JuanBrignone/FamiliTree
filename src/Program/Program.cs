@@ -7,22 +7,35 @@ namespace Program
     {
         static void Main(string[] args)
         {
-            Node n1 = new Node(1);
-            Node n2 = new Node(2);
-            Node n3 = new Node(3);
-            Node n4 = new Node(4);
-            Node n5 = new Node(5);
-            Node n6 = new Node(6);
-            Node n7 = new Node(7);
+           Persona abuelo = new Persona("Abuelo", 75);
+           Persona abuela = new Persona("Abuela", 70);
+           Persona padre = new Persona("Padre", 45);
+           Persona madre = new Persona ("Madre", 40);
+           Persona hijo = new Persona ("Hijo", 17);
 
-            n1.AddChildren(n2);
-            n1.AddChildren(n3);
+           Node abueloNode = new Node(abuelo);
+           Node abuelaNode = new Node (abuela);
+           Node padreNode = new Node (padre);
+           Node madreNode = new Node (madre);
+           Node hijoNode = new Node (hijo);
 
-            n2.AddChildren(n4);
-            n2.AddChildren(n5);
+           abueloNode.AddChildren(madreNode);
+           abuelaNode.AddChildren(madreNode);
+           madreNode.AddChildren(hijoNode);
+           padreNode.AddChildren(hijoNode);
 
-            n3.AddChildren(n6);
-            n3.AddChildren(n7);
+
+            EdadSumar edadSumarVisitor = new EdadSumar();
+
+            abueloNode.Accept(edadSumarVisitor);
+            abuelaNode.Accept(edadSumarVisitor);
+
+            int sumaedades = edadSumarVisitor.obtenersum();
+
+            Console.WriteLine("La suma de las edades es:" + sumaedades);
+           
+            
+           
 
             // visitar el árbol aquí
         }
